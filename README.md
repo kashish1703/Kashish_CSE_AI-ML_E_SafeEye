@@ -11,7 +11,7 @@ Shubham - 2301730291
 Project Description :
 The Real-Time Crime Detection System is an AI-based solution designed to monitor live CCTV footage and detect suspicious activities such as theft, fights, illegal parking, and unauthorized access. It uses advanced machine learning models like YOLOv8 for object detection and OpenCV for motion tracking. When unusual behavior is identified, the system generates real-time alerts with video snippets and timestamps, notifying authorities via a secure web dashboard. This enhances public safety by enabling faster response and reducing reliance on manual surveillance.
 
-Project Vedio Presentation : 
+Project Vedio Presentation : https://github.com/kashish1703/Kashish_CSE_AI-ML_E_SafeEye/blob/main/Safe%20Eye_G6_B.TECH(AIML)_SEC-E.mp4
 
 Technologies Used : 
 ✅ Machine Learning / Computer Vision
