@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Detection System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Pages -->
+    <div class="auth-container" id="auth-container">
+        <div class="auth-overlay"></div>
+        <div class="auth-card">
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1>Safe<span>Eye</span></h1>
+                <p>Real-time security monitoring system</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="login-email" placeholder="Email Address" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+                </div>
+                <button type="submit" class="auth-button">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div class="auth-footer">
+                    Don't have an account? <a href="#" id="show-signup">Sign up</a>
+                </div>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signup-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signup-name" placeholder="Full Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signup-email" placeholder="Email Address" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-user-tag"></i>
+                        <select id="signup-role" required>
+                            <option value="">Select Role</option>
+                            <option value="admin">Administrator</option>
+                            <option value="operator">Operator</option>
+                            <option value="viewer">Viewer</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="auth-button">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                <div class="auth-footer">
+                    Already have an account? <a href="#" id="show-login">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <div class="header">
+            <div class="header-left">
+                <h1><i class="fas fa-shield-alt"></i> SafeEye</h1>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="camera-search" placeholder="Search cameras...">
+                </div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="notification-badge" id="notification-badge">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                    <div class="notifications-dropdown" id="notifications-dropdown">
+                        <div class="notification-header">
+                            <h4>Notifications</h4>
+                            <span class="mark-all-read">Mark all as read</span>
+                        </div>
+                        <div class="notification-item unread">
+                            <div class="notification-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Fight Detected</span>
+                            </div>
+                            <div class="notification-time">2 minutes ago</div>
+                            <div class="notification-message">Physical altercation detected at Main Entrance</div>
+                        </div>
+                        <div class="notification-item unread">
+                            <div class="notification-title">
+                                <i class="fas fa-car"></i>
+                                <span>Illegal Parking</span>
+                            </div>
+                            <div class="notification-time">15 minutes ago</div>
+                            <div class="notification-message">Vehicle parked in no-parking zone at Parking Lot</div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-title">
+                                <i class="fas fa-user-secret"></i>
+                                <span>Suspicious Activity</span>
+                            </div>
+                            <div class="notification-time">1 hour ago</div>
+                            <div class="notification-message">Loitering detected near Building B</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-menu" id="user-menu">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                    <span>Admin User</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" data-view="dashboard-view"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <li><a href="#" data-view="cameras-view"><i class="fas fa-video"></i> <span>Cameras</span></a></li>
+                    <li><a href="#" data-view="incidents-view"><i class="fas fa-exclamation-triangle"></i> <span>Incidents</span></a></li>
+                    <li><a href="#" data-view="analytics-view"><i class="fas fa-chart-line"></i> <span>Analytics</span></a></li>
+                    <li><a href="#" data-view="users-view"><i class="fas fa-users"></i> <span>Users</span></a></li>
+                    <li><a href="#" id="settings-btn"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <!-- Dashboard View -->
+                <div id="dashboard-view">
+                    <h2 class="section-title"><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                    
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h3>Active Cameras</h3>
+                            <div class="value">6</div>
+                            <div class="change positive">
+                                <i class="fas fa-arrow-up"></i> 2 new
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Today's Incidents</h3>
+                            <div class="value">8</div>
+                            <div class="change negative">
+                                <i class="fas fa-arrow-up"></i> 3 more
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Alerts Resolved</h3>
+                            <div class="value">5</div>
+                            <div class="change positive">
+                                <i class="fas fa-arrow-up"></i> 100%
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>System Status</h3>
+                            <div class="value">Online</div>
+                            <div class="change positive">
+                                <i class="fas fa-circle"></i> All systems normal
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title"><i class="fas fa-video"></i> Live Camera Feeds</h2>
+                    
+                    <div class="camera-grid" id="camera-grid">
+                        <!-- Cameras will be added here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Single Camera View -->
+                <div class="camera-single" id="camera-single">
+                    <div class="camera-single-header">
+                        <div class="back-to-grid" id="back-to-grid">
+                            <i class="fas fa-arrow-left"></i> Back to all cameras
+                        </div>
+                        <h2 class="section-title" id="single-camera-title"></h2>
+                    </div>
+                    
+                    <div class="single-camera-feed">
+                        <div class="video-placeholder">
+                            <i class="fas fa-video"></i> Live feed from <span id="camera-name-placeholder"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="camera-controls">
+                        <button class="control-btn">
+                            <i class="fas fa-expand"></i> Fullscreen
+                        </button>
+                        <button class="control-btn">
+                            <i class="fas fa-camera"></i> Snapshot
+                        </button>
+                        <button class="control-btn">
+                            <i class="fas fa-record-vinyl"></i> Record
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Incidents View -->
+                <div class="incidents-container" id="incidents-view">
+                    <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Incident Reports</h2>
+                    
+                    <div class="incident-filters">
+                        <select class="filter-select" id="incident-type-filter">
+                            <option value="all">All Incident Types</option>
+                            <option value="fight">Fights</option>
+                            <option value="theft">Theft</option>
+                            <option value="parking">Illegal Parking</option>
+                            <option value="suspicious">Suspicious Activity</option>
+                        </select>
+                        
+                        <select class="filter-select" id="incident-status-filter">
+                            <option value="all">All Statuses</option>
+                            <option value="new">New</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                        
+                        <select class="filter-select" id="incident-date-filter">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                    
+                    <div class="incident-list">
+                        <!-- Incidents will be added here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Analytics View -->
+                <div class="analytics-container" id="analytics-view">
+                    <h2 class="section-title"><i class="fas fa-chart-line"></i> Analytics</h2>
+                    
+                    <div class="analytics-filters">
+                        <select class="filter-select" id="analytics-time-filter">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 90 Days</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                        
+                        <select class="filter-select" id="analytics-type-filter">
+                            <option value="all">All Locations</option>
+                            <option value="entrance">Entrances</option>
+                            <option value="parking">Parking Areas</option>
+                            <option value="indoor">Indoor Areas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <h3 class="chart-title"><i class="fas fa-chart-line"></i> Crime Trends</h3>
+                            <canvas id="crime-trend-chart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3 class="chart-title"><i class="fas fa-chart-pie"></i> Incident Types</h3>
+                            <canvas id="incident-type-chart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3 class="chart-title"><i class="fas fa-chart-bar"></i> Location Statistics</h3>
+                            <canvas id="location-chart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3 class="chart-title"><i class="fas fa-clock"></i> Time Distribution</h3>
+                            <canvas id="time-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users View -->
+                <div class="users-container" id="users-view">
+                    <h2 class="section-title"><i class="fas fa-users"></i> User Management</h2>
+                    
+                    <div class="users-actions">
+                        <button class="users-btn" id="add-user-btn">
+                            <i class="fas fa-user-plus"></i> Add User
+                        </button>
+                        <div class="users-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="user-search" placeholder="Search users...">
+                        </div>
+                    </div>
+                    
+                    <div class="users-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Users will be added here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crime Alert -->
+    <div class="crime-alert" id="crime-alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div class="crime-alert-content">
+            <h4>Crime Detected!</h4>
+            <p id="alert-message"></p>
+        </div>
+        <button class="close-alert" id="close-alert">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-header">
+            <h3><i class="fas fa-cog"></i> System Settings</h3>
+            <button class="close-settings"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="settings-content">
+            <div class="settings-tabs">
+                <div class="tab active" data-tab="general">
+                    <i class="fas fa-sliders-h"></i> General
+                </div>
+                <div class="tab" data-tab="notifications">
+                    <i class="fas fa-bell"></i> Notifications
+                </div>
+                <div class="tab" data-tab="security">
+                    <i class="fas fa-lock"></i> Security
+                </div>
+                <div class="tab" data-tab="cameras">
+                    <i class="fas fa-video"></i> Cameras
+                </div>
+                <div class="tab" data-tab="alerts">
+                    <i class="fas fa-exclamation-circle"></i> Alerts
+                </div>
+                <div class="tab" data-tab="storage">
+                    <i class="fas fa-database"></i> Storage
+                </div>
+                <div class="tab" data-tab="backup">
+                    <i class="fas fa-save"></i> Backup
+                </div>
+                <div class="tab" data-tab="system">
+                    <i class="fas fa-server"></i> System
+                </div>
+            </div>
+            <div class="tab-content active" data-tab="general">
+                <h4><i class="fas fa-sliders-h"></i> General Settings</h4>
+                <div class="setting-item">
+                    <label>System Name</label>
+                    <input type="text" value="CrimeDetect">
+                </div>
+                <div class="setting-item">
+                    <label>Theme</label>
+                    <select>
+                        <option>Dark</option>
+                        <option>Light</option>
+                        <option>System Default</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Language</label>
+                    <select>
+                        <option>English</option>
+                        <option>Spanish</option>
+                        <option>French</option>
+                        <option>German</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Time Zone</label>
+                    <select>
+                        <option>UTC</option>
+                        <option>Local Time</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="notifications">
+                <h4><i class="fas fa-bell"></i> Notification Settings</h4>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked> Enable Email Notifications
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked> Enable Push Notifications
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>Notification Sound</label>
+                    <select>
+                        <option>Default</option>
+                        <option>Alert</option>
+                        <option>Chime</option>
+                        <option>None</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Notification Volume</label>
+                    <input type="range" min="0" max="100" value="80">
+                </div>
+            </div>
+            <div class="tab-content" data-tab="security">
+                <h4><i class="fas fa-lock"></i> Security Settings</h4>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked> Require Two-Factor Authentication
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox"> Enable Automatic Logout
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>Session Timeout</label>
+                    <select>
+                        <option>15 minutes</option>
+                        <option>30 minutes</option>
+                        <option>1 hour</option>
+                        <option>2 hours</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Password Policy</label>
+                    <select>
+                        <option>Medium</option>
+                        <option>Strong</option>
+                        <option>Very Strong</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="cameras">
+                <h4><i class="fas fa-video"></i> Camera Settings</h4>
+                <div class="setting-item">
+                    <label>Default Camera View</label>
+                    <select>
+                        <option>Grid View</option>
+                        <option>Single View</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Video Quality</label>
+                    <select>
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked> Show Camera Names
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked> Show Camera Status
+                    </label>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="alerts">
+                <h4><i class="fas fa-exclamation-circle"></i> Alert Settings</h4>
+                <div class="setting-item">
+                    <label>Alert Display Time</label>
+                    <select>
+                        <option>5 seconds</option>
+                        <option>10 seconds</option>
+                        <option>30 seconds</option>
+                        <option>1 minute</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Alert Position</label>
+                    <select>
+                        <option>Bottom Left</option>
+                        <option>Top Right</option>
+                        <option>Center</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked> Play Sound on Alert
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox"> Flash Screen on Critical Alerts
+                    </label>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="storage">
+                <h4><i class="fas fa-database"></i> Storage Settings</h4>
+                <div class="setting-item">
+                    <label>Video Retention Period</label>
+                    <select>
+                        <option>7 days</option>
+                        <option>30 days</option>
+                        <option>90 days</option>
+                        <option>1 year</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Storage Location</label>
+                    <select>
+                        <option>Local Storage</option>
+                        <option>Cloud Storage</option>
+                        <option>Hybrid</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Storage Usage</label>
+                    <div class="storage-usage">
+                        <div class="usage-bar">
+                            <div class="usage-progress" style="width: 65%;"></div>
+                        </div>
+                        <span>65% used (32GB of 50GB)</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox"> Auto-cleanup when full
+                    </label>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="backup">
+                <h4><i class="fas fa-save"></i> Backup Settings</h4>
+                <div class="setting-item">
+                    <label>Backup Frequency</label>
+                    <select>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Backup Time</label>
+                    <input type="time" value="02:00">
+                </div>
+                <div class="setting-item">
+                    <label>Backup Location</label>
+                    <input type="text" placeholder="Enter backup location">
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked> Encrypt Backups
+                    </label>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="system">
+                <h4><i class="fas fa-server"></i> System Settings</h4>
+                <div class="setting-item">
+                    <label>System Version</label>
+                    <p>CrimeDetect v2.3.1</p>
+                </div>
+                <div class="setting-item">
+                    <label>Last Update</label>
+                    <p>2023-05-10</p>
+                </div>
+                <div class="setting-item">
+                    <label>System Status</label>
+                    <p><span class="status-badge online">Online</span></p>
+                </div>
+                <div class="setting-item">
+                    <label>Check for Updates</label>
+                    <button class="system-btn">
+                        <i class="fas fa-sync-alt"></i> Check Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
